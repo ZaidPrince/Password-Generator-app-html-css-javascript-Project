@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="generatepassward.css">
+    <title>Document</title>
+</head>
+<body class="bg-gradient-to-r from-indigo-500 via-purple-600 to-fuchsia-800 flex justify-center items-center h-screen">
+    <div class=" w-1/4 mx-auto items-start flex flex-col justify-center ">
+        <div class="text-2xl font-semibold text-white"> Generate a <br> <span class="text-black border-b border-black animate-pulse ">Random Passward</span></div>
+        <div class="flex bg-white h-10 w-full rounded-sm overflow-hidden items-center justify-between mt-5 "><input type="text" class="w-auto h-full   outline-none py-4  rounded-sm passwardinput" placeholder="Passward" readonly><i class="fa-solid fa-copy mr-3 copyp"></i></div>
+        <div class="copymessage h-5 font-mono text-sm text-blue-600 bg-orange-100 rounded-sm px-1 mt-2 hidden"></div>
+        <button class="bg-orange-600 text-lg font-semibold border border-white rounded-sm px-2 py-1 mt-3 generatebutton ">Get Passward</button>
+    </div>
+    <script>
+        const copymessage=document.querySelector('.copymessage')
+        const copyicon=document.querySelector('.copyp')
+        const button=document.querySelector('.generatebutton')
+        const passwardbox=document.querySelector('.passwardinput')
+        const uppercase='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        const lowercase='abcdefghijklmnopqrstuvwxyz'
+        const numbers='1234567890'
+        const specialchar='!@#$%^&*({[\|/?]})'
+        const allchar=uppercase+lowercase+specialchar
+        const passwardlength=10
+        let passward=''
+        function generatepassward() {
+            button.addEventListener('click',function (e) {
+                copymessage.innerHTML=''
+                copymessage.style.display='none' 
+           passward=''
+
+            passward+=uppercase[Math.floor(Math.random()*uppercase.length)]
+            passward+=lowercase[Math.floor(Math.random()*lowercase.length)]
+            passward+=specialchar[Math.floor(Math.random()*specialchar.length)]
+            while (passward.length<10) {
+
+                passward+=allchar[Math.floor(Math.random()*allchar.length)]
+            }
+            passwardbox.value=passward
+        })
+            
+        }
+        generatepassward()
+        function copypassward() {
+            copyicon.addEventListener('click',function (e) {
+                passwardbox.select()
+                document.execCommand('copy')
+                if (passward!=='') {
+                    copymessage.style.display='block'
+                    copymessage.innerHTML='Passward Copied'   
+                }
+               
+                
+                
+            })
+           
+
+            
+        }
+        copypassward()
+    </script>
+    
+</body>
+</html>
